@@ -36,8 +36,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Shout outs to [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) for the template of the at-a-glance expense report.
 
 Version 0.0.1
