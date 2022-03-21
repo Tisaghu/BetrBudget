@@ -17,7 +17,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5">
+        app:layout_constraintTop_toBottomOf="@+id/homeBtn">
+
+        <ImageButton
+            android:id="@+id/homeBtn"
+            android:onClick="homeNavigate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/btn_star_big_off" />
 
         <ImageButton
             android:id="@+id/imageButton4"
@@ -25,21 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_dialog_email"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star_big_off" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_preferences"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -56,14 +49,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_preferences"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="135dp"
         android:layout_height="79dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginEnd="178dp"
         android:text="Options"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -71,22 +71,61 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="40dp" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notifications"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="105dp" />
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Account"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        tools:layout_editor_absoluteX="128dp" />
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="122dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@id/radioButton3"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:checked="false"
+            android:text="Daily" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:text="Weekly" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:text="Monthly" />
+
+    </RadioGroup>
+    <![CDATA[
+
+    />
+
+]]>
 </androidx.constraintlayout.widget.ConstraintLayout>
