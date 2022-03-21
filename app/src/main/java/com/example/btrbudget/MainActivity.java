@@ -17,9 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
         // get views of other layouts
         View optionsScrn = getLayoutInflater().inflate(R.layout.options_screen, null);
+        View groupScrn = getLayoutInflater().inflate(R.layout.group_screen, null);
+        View expenseScrn = getLayoutInflater().inflate(R.layout.expense_page, null);
+        View reportScrn = getLayoutInflater().inflate(R.layout.report_screen, null);
 
-        ImageButton settingsBtn = (ImageButton) optionsScrn.findViewById(R.id.settingsBtn);
-        ImageButton homeBtn = (ImageButton) findViewById(R.id.homeBtn);
     }
 
     public void homeNavigate(View view)
@@ -31,4 +32,19 @@ public class MainActivity extends AppCompatActivity {
     {
         setContentView(R.layout.options_screen);
     }
+
+    public void groupNavigate(View view)
+    {
+        setContentView(R.layout.group_screen);
+    }
+
+    public void expenseNavigate(View view)
+    {
+        setContentView(R.layout.expense_page);
+    }
+    public void reportNavigate(View view)
+    {
+        setContentView(R.layout.report_screen);
+    }
+
 }
