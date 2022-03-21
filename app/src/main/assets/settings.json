@@ -1,6 +1,7 @@
 {
   "user": {
-    "name": "DeezNuts",
-    "moneySaved": 100
+    "name": "Deezer Nouts",
+    "moneySaved": 100,
+    "expenseReportPeriod": "weekly"
   }
 }
