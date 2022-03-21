@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void homeNavigate(View view)
     {
+        this.findViewById(android.R.id.content).getRootView();
+
         setContentView(R.layout.activity_main);
 
         //Set default class values for pie chart
