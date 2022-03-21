@@ -58,9 +58,10 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Android Studio](https://developer.android.com/docs) - The application development software used
+* [Java](https://www.java.com/en/download/help/whatis_java.html) - The programming language used
+* [XML](https://www.xml.com/) - Used to generate individual formatted screens
+* [Pie Chart](Pie chart) - Used to generate an expense report pie chart
 
 ## Contributing
 
@@ -72,7 +73,12 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Connor Kilgore** - *Initial work* - [Enter Link Here](https://google.com)
+* **Chris McCorkle** - *Initial Work* - [Enter Link Here](https://google.com)
+* **Richard McCue** - *Initial Work* - [Enter Link Here](https://google.com)
+* **Samuel Asher - *Initial Work* 
+* **Eli Barela** - *Initial Work*
+* **Christopher K Calahan Jr** - *Initial Work*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
