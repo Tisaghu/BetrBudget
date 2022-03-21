@@ -27,7 +27,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Connor Kilgore** - *Initial work* - [Enter Link Here](https://google.com)
 * **Chris McCorkle** - *Initial Work* - [Enter Link Here](https://google.com)
 * **Richard McCue** - *Initial Work* - [Enter Link Here](https://google.com)
-* **Samuel Asher - *Initial Work* 
+* **Samuel Asher** - *Initial Work* 
 * **Eli Barela** - *Initial Work*
 * **Christopher K Calahan Jr** - *Initial Work*
 
