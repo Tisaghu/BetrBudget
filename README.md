@@ -12,7 +12,8 @@ The BetrBudget app is a simple budgeting app aimed at college students with room
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on the process for submitting pull requests to us.
+Please read [CODE_OF_CONDUCT.md](https://github.com/ChrisCalah/BetrBudget/blob/master/CODE_OF_CONDUCT.md) for details on contributing to the development of this system responsibly.
 
 ## Versioning
 
