@@ -55,15 +55,6 @@
             app:srcCompat="@android:drawable/ic_dialog_email" />
 
         <ImageButton
-            android:id="@+id/settingsBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="settingsNavigate"
-            app:srcCompat="@android:drawable/ic_menu_preferences"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageButton
             android:id="@+id/imageButton3"
             tools:ignore="SpeakableTextPresentCheck"
             android:layout_width="0dp"
@@ -79,6 +70,15 @@
             android:layout_weight="1"
             android:onClick="expenseNavigate"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="settingsNavigate"
+            app:srcCompat="@android:drawable/ic_menu_preferences"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
