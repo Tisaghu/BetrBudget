@@ -4,34 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
-// JSON stuff
-import org.json.*;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        JSONObject settingsJSON = new JSONObject();
-
-        try {
-            settingsJSON.put("UserName", "DeezNuts");
-            settingsJSON.put("moneySaved", 100);
-        }
-        catch(JSONException e)
-        {
-            e.printStackTrace();
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // get views of other layouts
         View optionsScrn = getLayoutInflater().inflate(R.layout.options_screen, null);
 
+        ImageButton settingsBtn = (ImageButton) optionsScrn.findViewById(R.id.settingsBtn);
+        ImageButton homeBtn = (ImageButton) findViewById(R.id.homeBtn);
     }
 
     public void homeNavigate(View view)
