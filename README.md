@@ -3,10 +3,6 @@
 The BetrBudget app is a simple budgeting app aimed at college students with roommates. It will allow for group budgeting, setting aside expenses for the rent and bills due. Mostly it is our group project for CS 386.
 
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [Android Studio](https://developer.android.com/docs) - The application development software used
@@ -43,3 +39,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 
+Version 0.0.1
