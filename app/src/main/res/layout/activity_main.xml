@@ -32,11 +32,10 @@
                 android:textAlignment="center"
                 app:autoSizeTextType="uniform" />
 
-            <ImageView
-                android:id="@+id/imageView"
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/activity_main_piechart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:srcCompat="@drawable/unknown" />
+                android:layout_height="527dp" />
 
             <TextView
                 android:id="@+id/textView4"
