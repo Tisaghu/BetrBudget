@@ -71,15 +71,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton5">
 
         <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="groupNavigate"
-            app:srcCompat="@android:drawable/ic_dialog_email"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageButton
             android:id="@+id/imageButton5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,11 +78,12 @@
             app:srcCompat="@android:drawable/btn_star_big_off" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/imageButton4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_menu_preferences"
+            android:onClick="groupNavigate"
+            app:srcCompat="@android:drawable/ic_dialog_email"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -110,6 +102,14 @@
             android:layout_weight="1"
             android:onClick="expenseNavigate"
             app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_preferences"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
