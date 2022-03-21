@@ -1,4 +1,4 @@
-# Project Title
+# BetrBudget
 
 One Paragraph of project description goes here
 
