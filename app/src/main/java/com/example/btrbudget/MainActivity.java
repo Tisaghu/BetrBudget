@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,6 +36,12 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setupPieChart();
         loadPieChartData();
 
+        get_json();
     }
 
     public void homeNavigate(View view)
@@ -137,16 +145,68 @@ public class MainActivity extends AppCompatActivity {
         pieChart.animateY(1300, Easing.EaseInOutQuad);
     }
 
-    public void settingsNavigate(View view)
+    // accesses settings data and sets the settings accordingly.
+    public String get_json()
     {
-        setContentView(R.layout.options_screen);
+        String notificationPeriod = "daily";
+
+        // define variables
+        String json;
+        int index;
+
+        // try to open and read the file
+        try
+        {
+            // access input stream
+            InputStream is = getAssets().open("settings.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            // make a jsonArray
+            json = new String(buffer, "UTF-8");
+            JSONArray jsonArray = new JSONArray(json);
+
+            // loop through length of jsonArray
+            for(index = 0; index < jsonArray.length(); index++)
+            {
+                JSONObject obj = jsonArray.getJSONObject(index);
+                if(obj.getString("name").equals("Deezer Nouts"))
+                {
+                    notificationPeriod = obj.getString("expenseReportPeriod");
+                }
+            }
+        }
+        // print error message if failed
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return notificationPeriod;
     }
 
+
+    public void settingsNavigate(View view)
+    {
+        // set the screen to the settings window
+        setContentView(R.layout.options_screen);
+
+        // get the user saved settings
+            // method: getJson()
+        String setting = get_json();
+
+        // set all buttons to false
+        R.id.daily.isChecked() = false;
+    }
     public void groupNavigate(View view)
     {
         setContentView(R.layout.group_screen);
     }
-
     public void expenseNavigate(View view)
     {
         setContentView(R.layout.expense_page);
