@@ -21,11 +21,13 @@ package com.example.btrbudget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.RadioGroup;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -36,18 +38,28 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
     //create PieChart instance/object
     private PieChart pieChart;
+    private UserSettings settings = new UserSettings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
         setupPieChart();
         loadPieChartData();
+    }
 
-        get_json();
+    protected void onClose()
+    {
+
     }
 
     public void homeNavigate(View view)
@@ -146,63 +161,97 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // accesses settings data and sets the settings accordingly.
-    public String get_json()
-    {
-        String notificationPeriod = "daily";
+    public UserSettings get_json() throws IOException, JSONException {
 
-        // define variables
-        String json;
-        int index;
+        File path = getApplicationContext().getFilesDir();
+        File readFrom = new File(path, "settings.json");
+        byte[] content = new byte[(int) readFrom.length()];
 
-        // try to open and read the file
-        try
-        {
-            // access input stream
-            InputStream is = getAssets().open("settings.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
+        try {
+            FileInputStream stream = new FileInputStream(readFrom);
+            stream.read(content);
 
-            // make a jsonArray
-            json = new String(buffer, "UTF-8");
-            JSONArray jsonArray = new JSONArray(json);
+            JSONObject obj = new JSONObject(new String(content));
+            return new UserSettings(obj.getString("name"), obj.getInt("moneySaved"),
+                    obj.getInt("expenseReportPeriod"));
 
-            // loop through length of jsonArray
-            for(index = 0; index < jsonArray.length(); index++)
-            {
-                JSONObject obj = jsonArray.getJSONObject(index);
-                if(obj.getString("name").equals("Deezer Nouts"))
-                {
-                    notificationPeriod = obj.getString("expenseReportPeriod");
-                }
-            }
-        }
-        // print error message if failed
-        catch(IOException e)
-        {
+        }catch (Exception e){
             e.printStackTrace();
         }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        return notificationPeriod;
+        return new UserSettings();
     }
 
+    // updates the settings json file to appropriate values
+    public void updateSettings(UserSettings usrSettings) throws JSONException {
+        // create a JSONObject
+        JSONObject obj = new JSONObject();
 
-    public void settingsNavigate(View view)
-    {
+        // put relevant values into json object
+        obj.put("name", usrSettings.name);
+        obj.put("moneySaved", usrSettings.moneySaved);
+        obj.put("notificationSetting", usrSettings.notificationSetting);
+
+        File path = getApplicationContext().getFilesDir();
+        try {
+            FileOutputStream writer = new FileOutputStream(new File(path, "settings.json"));
+            writer.write(obj.toString().getBytes());
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // runs when screen is navigated to settings
+    public void settingsNavigate(View view) throws JSONException, IOException {
         // set the screen to the settings window
         setContentView(R.layout.options_screen);
 
-        // get the user saved settings
-            // method: getJson()
-        String setting = get_json();
+        // define variables
+        RadioGroup radioGrp = findViewById(R.id.settingsRadioButtons);
+        Button saveBtn = findViewById(R.id.saveButton);
+        saveBtn.setBackgroundColor(Color.GREEN);
 
-        // set all buttons to false
-        R.id.daily.isChecked() = false;
+        // check if notification setting is null
+        if(settings.notificationSetting == -1)
+        {
+            // get the user saved settings
+              // method: getJson()
+            //settings = get_json();
+        }
+
+        // check the appropriate button based on the id from the saved data
+        radioGrp.check(settings.notificationSetting);
+
+        // run when checked button changes
+        radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedID) {
+                // define variables
+
+                // update settings to the checkedID
+                settings.notificationSetting = checkedID;
+                // set save button to color red
+                saveBtn.setBackgroundColor(Color.RED);
+            }
+        });
+
+        // run when save button is pressed
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // write new data into json file
+                try {
+                    updateSettings(settings);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // change save button to green
+                saveBtn.setBackgroundColor(Color.GREEN);
+            }
+        });
     }
+
+
     public void groupNavigate(View view)
     {
         setContentView(R.layout.group_screen);

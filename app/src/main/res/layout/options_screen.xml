@@ -16,8 +16,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeBtn">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/homeBtn"
@@ -75,7 +74,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="40dp" />
+        tools:layout_editor_absoluteY="40dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
@@ -90,18 +90,37 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="153dp"
+        android:layout_marginBottom="100dp"
         android:text="Account"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#11FF00"
+        android:text="Save Settings"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsRadioButtons" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/settingsRadioButtons"
         android:layout_width="122dp"
         android:layout_height="210dp"
         android:layout_marginTop="16dp"
-        android:checkedButton="@id/weekly"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -118,7 +137,7 @@
             android:id="@+id/weekly"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:checked="true"
+            android:checked="false"
             android:text="Weekly" />
 
         <RadioButton
