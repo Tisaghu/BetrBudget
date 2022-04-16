@@ -257,4 +257,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.report_screen);
     }
 
+    public void AddExpense()
+    {
+        Context ctx = getApplicationContext();
+        Expenses expnses = new Expenses(ctx);
+
+        expnses.addExpense();
+    }
+
+
 }
