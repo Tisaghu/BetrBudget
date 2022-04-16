@@ -211,14 +211,6 @@ public class MainActivity extends AppCompatActivity {
         Button saveBtn = findViewById(R.id.saveButton);
         saveBtn.setBackgroundColor(Color.GREEN);
 
-        // check if notification setting is null
-        if(settings.notificationSetting == -1)
-        {
-            // get the user saved settings
-              // method: getJson()
-            //settings = get_json();
-        }
-
         // check the appropriate button based on the id from the saved data
         radioGrp.check(settings.notificationSetting);
 
