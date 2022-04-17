@@ -21,10 +21,15 @@ package com.example.btrbudget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,12 +40,20 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
     //create PieChart instance/object
     private PieChart pieChart;
+    private UserSettings settings = new UserSettings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         setupPieChart();
         loadPieChartData();
+    }
+
+    protected void onClose()
+    {
 
     }
 
@@ -137,16 +154,94 @@ public class MainActivity extends AppCompatActivity {
         pieChart.animateY(1300, Easing.EaseInOutQuad);
     }
 
-    public void settingsNavigate(View view)
-    {
-        setContentView(R.layout.options_screen);
+    // accesses settings data and sets the settings accordingly.
+    public UserSettings get_json() throws IOException, JSONException {
+
+        File path = getApplicationContext().getFilesDir();
+        File readFrom = new File(path, "settings.json");
+        byte[] content = new byte[(int) readFrom.length()];
+
+        try {
+            FileInputStream stream = new FileInputStream(readFrom);
+            stream.read(content);
+
+            JSONObject obj = new JSONObject(new String(content));
+            return new UserSettings(obj.getString("name"), obj.getInt("moneySaved"),
+                    obj.getInt("expenseReportPeriod"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new UserSettings();
     }
+
+    // updates the settings json file to appropriate values
+    public void updateSettings(UserSettings usrSettings) throws JSONException {
+        // create a JSONObject
+        JSONObject obj = new JSONObject();
+
+        // put relevant values into json object
+        obj.put("name", usrSettings.name);
+        obj.put("moneySaved", usrSettings.moneySaved);
+        obj.put("notificationSetting", usrSettings.notificationSetting);
+
+        File path = getApplicationContext().getFilesDir();
+        try {
+            FileOutputStream writer = new FileOutputStream(new File(path, "settings.json"));
+            writer.write(obj.toString().getBytes());
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // runs when screen is navigated to settings
+    public void settingsNavigate(View view) throws JSONException, IOException {
+        // set the screen to the settings window
+        setContentView(R.layout.options_screen);
+
+        // define variables
+        RadioGroup radioGrp = findViewById(R.id.settingsRadioButtons);
+        Button saveBtn = findViewById(R.id.saveButton);
+        saveBtn.setBackgroundColor(Color.GREEN);
+
+        // check the appropriate button based on the id from the saved data
+        radioGrp.check(settings.notificationSetting);
+
+        // run when checked button changes
+        radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedID) {
+                // define variables
+
+                // update settings to the checkedID
+                settings.notificationSetting = checkedID;
+                // set save button to color red
+                saveBtn.setBackgroundColor(Color.RED);
+            }
+        });
+
+        // run when save button is pressed
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // write new data into json file
+                try {
+                    updateSettings(settings);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // change save button to green
+                saveBtn.setBackgroundColor(Color.GREEN);
+            }
+        });
+    }
+
 
     public void groupNavigate(View view)
     {
         setContentView(R.layout.group_screen);
     }
-
     public void expenseNavigate(View view)
     {
         setContentView(R.layout.expense_page);
@@ -156,4 +251,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.report_screen);
     }
 
+    // runs when navigated to group screen
+    public void inGroupNavigate(View view){
+
+        int index;
+
+        // set the content view
+        setContentView(R.layout.in_group_screen);
+
+        // initialize a new group
+        Group thisGroup = new Group(1234);
+
+        thisGroup.addExpense(15, "4/16/2022", "Mcdoonals Borger", "yumm.");
+        thisGroup.addExpense(100, "3/16/2022", "Hooker", "yumm.");
+        thisGroup.addExpense(159.23, "2/20/2022", "Cocaine", "yumm.");
+        thisGroup.addExpense(20030, "1/20/2022", "TESLA MOTHER FUCKER", "yumm.");
+
+        for(index = 0; index < thisGroup.expenseList.size(); index++)
+        {
+            TextView text = new TextView(this);
+            if (index % 2 == 0)
+            {
+                createExpenseXMLElement(thisGroup.expenseList.get(index), Color.GRAY, text);
+            }
+            else
+            {
+                createExpenseXMLElement(thisGroup.expenseList.get(index), Color.LTGRAY, text);
+            }
+        }
+    }
+
+    public void createExpenseXMLElement(Expense expense, int color, TextView text)
+    {
+        LinearLayout groupScreen = (LinearLayout) findViewById(R.id.groupExpenses);
+        text.setText(expense.name + " - " + expense.amount + " - " + expense.date);
+        text.setBackgroundColor(color);
+        text.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        text.setTextSize(18);
+        text.setHeight(200);
+        groupScreen.addView(text);
+    }
+
+    public void AddExpense()
+    {
+        Context ctx = getApplicationContext();
+        Expenses expnses = new Expenses(ctx);
+
+        expnses.addExpense();
+    }
 }
