@@ -21,6 +21,8 @@ package com.example.btrbudget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -260,10 +262,10 @@ public class MainActivity extends AppCompatActivity {
         // initialize a new group
         Group thisGroup = new Group(1234);
 
-       thisGroup.addExpense(15, "4/16/2022", "Mcdoonals Borger", "yumm.");
-       thisGroup.addExpense(100, "3/16/2022", "Hooker", "yumm.");
-       thisGroup.addExpense(159.23, "2/20/2022", "Cocaine", "yumm.");
-       thisGroup.addExpense(20030, "1/20/2022", "TESLA MOTHER FUCKER", "yumm.");
+        thisGroup.addExpense(15, "4/16/2022", "Mcdoonals Borger", "yumm.");
+        thisGroup.addExpense(100, "3/16/2022", "Hooker", "yumm.");
+        thisGroup.addExpense(159.23, "2/20/2022", "Cocaine", "yumm.");
+        thisGroup.addExpense(20030, "1/20/2022", "TESLA MOTHER FUCKER", "yumm.");
 
         for(index = 0; index < thisGroup.expenseList.size(); index++)
         {
@@ -288,5 +290,13 @@ public class MainActivity extends AppCompatActivity {
         text.setTextSize(18);
         text.setHeight(200);
         groupScreen.addView(text);
+    }
+
+    public void AddExpense()
+    {
+        Context ctx = getApplicationContext();
+        Expenses expnses = new Expenses(ctx);
+
+        expnses.addExpense();
     }
 }
